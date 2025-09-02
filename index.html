@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌟 Kinder Manager - Gestión Escolar</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
+
+  <!-- Meta tags para mejor SEO -->
+  <meta name="description" content="Sistema moderno de gestión de asistencia para jardines de infantes">
+  <meta name="keywords" content="kinder, jardín de infantes, asistencia, gestión escolar">
+  <meta name="author" content="Kinder Manager">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="bi bi-book-half me-2"></i>
+        📚 Kinder Manager
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#students">
+              <i class="bi bi-people-fill me-1"></i>
+              👨‍🎓 Alumnos
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#attendance">
+              <i class="bi bi-calendar-check-fill me-1"></i>
+              📝 Asistencia
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#report">
+              <i class="bi bi-bar-chart-line-fill me-1"></i>
+              📊 Reportes
+            </a>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-outline-light ms-2" onclick="mostrarEstadisticasRapidas()" title="Ver estadísticas rápidas">
+              <i class="bi bi-bar-chart"></i>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <!-- Hero Section -->
+    <div class="text-center mb-5 fade-in">
+      <h1 class="display-4 fw-bold text-dark mb-3">
+        🌟 Bienvenidos a Kinder Manager
+      </h1>
+      <p class="lead text-muted mb-4">
+        Sistema moderno para gestionar la asistencia y seguimiento de nuestros pequeños estudiantes
+      </p>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="alert alert-info border-0 shadow-sm">
+            <i class="bi bi-info-circle-fill me-2"></i>
+            <strong>¡Información!</strong> La aplicación incluye datos de ejemplo para que puedas probar todas las funcionalidades inmediatamente.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="students" class="fade-in">
+      <h2 class="section-title text-center">
+        <i class="bi bi-people-fill text-primary me-2"></i>
+        👨‍🎓 Nuestros Estudiantes
+      </h2>
+      <p class="text-center text-muted mb-4">
+        Conoce a nuestros pequeños exploradores y sus aventuras diarias
+      </p>
+      <div class="row" id="students-container">
+        <!-- Students will be loaded here -->
+      </div>
+    </section>
+
+    <section id="attendance" class="mt-5 fade-in">
+      <h2 class="section-title text-center">
+        <i class="bi bi-calendar-check-fill text-success me-2"></i>
+        📝 Registro de Asistencia
+      </h2>
+      <p class="text-center text-muted mb-4">
+        Registra la asistencia diaria de manera rápida y sencilla
+      </p>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card shadow-sm mb-4">
+            <div class="card-body">
+              <div class="mb-4">
+                <label for="attendance-date" class="form-label fw-bold">
+                  <i class="bi bi-calendar-event me-2"></i>
+                  📅 Selecciona la Fecha de Asistencia
+                </label>
+                <input type="date" class="form-control form-control-lg" id="attendance-date" onchange="mostrarFormularioAsistencia()">
+                <small class="text-muted mt-1 d-block">
+                  <i class="bi bi-info-circle me-1"></i>
+                  El formulario se cargará automáticamente al seleccionar una fecha
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="attendance-section" style="display: none;">
+        <div class="card shadow-sm">
+          <div class="card-header bg-light">
+            <h5 class="mb-0">
+              <i class="bi bi-clipboard-check me-2"></i>
+              📋 Formulario de Asistencia
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead class="table-dark">
+                  <tr>
+                    <th><i class="bi bi-person-circle me-1"></i> 👨‍🎓 Alumno</th>
+                    <th><i class="bi bi-check-circle-fill me-1"></i> ✅ Estado</th>
+                    <th><i class="bi bi-pencil-square me-1"></i> 📝 Observación</th>
+                  </tr>
+                </thead>
+                <tbody id="attendance-container">
+                  <!-- Attendance form will be loaded here -->
+                </tbody>
+              </table>
+            </div>
+            <div class="text-center mt-4">
+              <button class="btn btn-success btn-lg px-5" onclick="guardarRegistroAsistencia()">
+                <i class="bi bi-save-fill me-2"></i>
+                💾 Guardar Registro
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="report" class="mt-5 fade-in">
+      <h2 class="section-title text-center">
+        <i class="bi bi-bar-chart-line-fill text-warning me-2"></i>
+        📊 Reportes y Estadísticas
+      </h2>
+      <p class="text-center text-muted mb-4">
+        Genera reportes detallados de asistencia y observa las estadísticas del día
+      </p>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card shadow-sm mb-4">
+            <div class="card-body">
+              <div class="mb-4">
+                <label for="report-date" class="form-label fw-bold">
+                  <i class="bi bi-calendar-event me-2"></i>
+                  📅 Selecciona Fecha del Reporte
+                </label>
+                <input type="date" class="form-control form-control-lg" id="report-date">
+                <small class="text-muted mt-1 d-block">
+                  <i class="bi bi-lightbulb me-1"></i>
+                  Prueba con la fecha de hoy para ver datos de ejemplo
+                </small>
+              </div>
+              <div class="text-center">
+                <button class="btn btn-primary btn-lg me-3 px-4" onclick="generarReporte()">
+                  <i class="bi bi-bar-chart-fill me-2"></i>
+                  📊 Generar Reporte
+                </button>
+                <button class="btn btn-warning btn-lg px-4" onclick="limpiarDatosAsistencia()">
+                  <i class="bi bi-trash-fill me-2"></i>
+                  🗑️ Limpiar Datos
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="report-section" style="display: none;" class="mt-4">
+        <div id="report-summary" class="alert alert-info border-0 shadow-sm mb-4"></div>
+        <div class="card shadow-sm">
+          <div class="card-header bg-light">
+            <h5 class="mb-0">
+              <i class="bi bi-list-check me-2"></i>
+              📋 Lista Detallada de Asistencia
+            </h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush" id="report-list"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Modal for student details -->
+  <div class="modal fade" id="studentModal" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="studentModalLabel">
+            <i class="bi bi-person-circle-fill me-2"></i>
+            👨‍🎓 Detalles del Estudiante
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <div class="mb-4">
+            <img id="student-photo" src="" alt="Foto del estudiante" class="img-fluid rounded-circle shadow-sm mb-4" style="width: 180px; height: 180px; object-fit: cover; border: 4px solid #ff6b35;">
+          </div>
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <h4 id="student-name" class="card-title text-primary fw-bold mb-3"></h4>
+              <div class="row">
+                <div class="col-12">
+                  <div class="p-3 bg-light rounded">
+                    <i class="bi bi-cake-candle-fill text-warning me-2 fs-5"></i>
+                    <strong class="text-dark">Edad:</strong>
+                    <span id="student-age" class="badge bg-primary ms-2 fs-6"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="bi bi-x-circle me-2"></i>
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for confirmation -->
+  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-success">
+          <h5 class="modal-title text-white" id="confirmModalLabel">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            ✅ ¡Éxito!
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center py-4">
+          <div class="mb-3">
+            <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
+          </div>
+          <h5 class="text-success fw-bold mb-3">Registro guardado exitosamente</h5>
+          <p class="text-muted mb-0">Los datos de asistencia han sido almacenados correctamente.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success px-4" data-bs-dismiss="modal">
+            <i class="bi bi-check me-2"></i>
+            Aceptar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container position-fixed top-0 end-0 p-3" id="toast-container"></div>
+
+  <!-- Indicador de carga global -->
+  <div class="loading-overlay hidden" id="loading-overlay">
+    <div class="text-center">
+      <div class="loading" style="width: 50px; height: 50px; margin: 0 auto 1rem;"></div>
+      <h5 class="text-primary fw-bold">Cargando Kinder Manager...</h5>
+      <p class="text-muted">Preparando la mejor experiencia para ti</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer mt-5">
+    <div class="container">
+      <div class="row text-center text-white">
+        <div class="col-md-6">
+          <h5 class="fw-bold mb-3">
+            <i class="bi bi-stars me-2"></i>
+            Kinder Manager
+          </h5>
+          <p class="mb-0">Sistema moderno para la gestión de asistencia en jardines de infantes</p>
+        </div>
+        <div class="col-md-6">
+          <h6 class="fw-bold mb-3">Funcionalidades</h6>
+          <ul class="list-unstyled">
+            <li><i class="bi bi-check-circle me-2"></i>Registro de asistencia</li>
+            <li><i class="bi bi-check-circle me-2"></i>Reportes diarios</li>
+            <li><i class="bi bi-check-circle me-2"></i>Gestión de estudiantes</li>
+            <li><i class="bi bi-check-circle me-2"></i>Interfaz intuitiva</li>
+          </ul>
+        </div>
+      </div>
+      <hr class="my-4" style="border-color: rgba(255, 255, 255, 0.3);">
+      <div class="text-center">
+        <p class="mb-0">
+          <i class="bi bi-heart-fill text-warning me-1"></i>
+          Desarrollado con pasión para educadores y pequeños exploradores
+          <i class="bi bi-heart-fill text-warning ms-1"></i>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

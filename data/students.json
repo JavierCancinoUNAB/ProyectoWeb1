@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Juan Pérez",
+    "age": 5,
+    "photo": "images/juan.jpg"
+  },
+  {
+    "id": 2,
+    "name": "María García",
+    "age": 4,
+    "photo": "images/maria.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Carlos López",
+    "age": 5,
+    "photo": "images/carlos.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Ana Rodríguez",
+    "age": 4,
+    "photo": "images/ana.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Pedro Martínez",
+    "age": 5,
+    "photo": "images/pedro.jpg"
+  }
+]
