@@ -13,6 +13,24 @@
  * - Agregar validación de datos del servidor
  * - Considerar implementar caché local con service workers
  */
+// ---  LocalStorage ---
+const StorageService = {
+    saveData(key, data) {
+        localStorage.setItem(key, JSON.stringify(data));
+    },
+    getData(key) {
+        return JSON.parse(localStorage.getItem(key));
+    }
+};
+// --- Validaciones---
+function validateForm(data) {
+    const errors = [];
+    if (!data.name) {
+        errors.push('El nombre es requerido');
+    }
+    // ...más validaciones
+    return errors;
+}
 
 // Variables globales
 let estudiantes = []; // Array para almacenar los datos de estudiantes
